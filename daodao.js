@@ -53,9 +53,10 @@ var generateddHtml = array => {
             };
 
             var dataTime = '<p class="datatime">'+array[i].date+'</p>'
-
-
-            result += `<li class="item"><div>`+ dataTime  + `<p class="datacont">`+HTMLDecode( array[i].content) +`</p><p class="datafrom"><small>`+ from_icon + decodeURIComponent(array[i].from) +`</small></p></div></li>`;
+            var decodedHTML = HTMLDecode( array[i].content);
+            var scriptHTML = decodedHTML.match(/<script>.*<\/script>/)[0];
+            $('#cont').html(scriptHTML);
+            result += `<li class="item"><div>`+ dataTime  + `<p class="datacont">`+decodedHTML.replace(/<script>.*<\/script>/,"") +`</p><p class="datafrom"><small>`+ from_icon + decodeURIComponent(array[i].from) +`</small></p></div></li>`;
         }
     } else {
         result += '!{_p("aside.card_funds.zero")}';
