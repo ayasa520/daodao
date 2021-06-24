@@ -27,7 +27,13 @@ function getdddata(){
         }
     };
 }
-
+function HTMLDecode(text) { 
+    var temp = document.createElement("div"); 
+    temp.innerHTML = text; 
+    var output = temp.innerText || temp.textContent; 
+    temp = null; 
+    return output; 
+} 
 var generateddHtml = array => {
     var $dom = document.querySelector('#bber');
     var result = '<section class="timeline page-1"><ul><div class="list">'
@@ -49,7 +55,7 @@ var generateddHtml = array => {
             var dataTime = '<p class="datatime">'+array[i].date+'</p>'
 
 
-            result += `<li class="item"><div>`+ dataTime  + `<p class="datacont">`+ array[i].content +`</p><p class="datafrom"><small>`+ from_icon + decodeURIComponent(array[i].from) +`</small></p></div></li>`;
+            result += `<li class="item"><div>`+ dataTime  + `<p class="datacont">`+HTMLDecode( array[i].content) +`</p><p class="datafrom"><small>`+ from_icon + decodeURIComponent(array[i].from) +`</small></p></div></li>`;
         }
     } else {
         result += '!{_p("aside.card_funds.zero")}';
