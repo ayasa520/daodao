@@ -55,11 +55,11 @@ var generateddHtml = array => {
 
             var dataTime = '<p class="datatime">'+array[i].date+'</p>'
             var decodedHTML = HTMLDecode( array[i].content);
-            var scriptHTMLList = decodedHTML.match(/<script>.*<\/script>/);
-            if(scriptHTMLList!=null)
-                scriptHTML += scriptHTMLList[0];
+//             var scriptHTMLList = decodedHTML.match(/<script>.*<\/script>/);
+//             if(scriptHTMLList!=null)
+//                 scriptHTML += scriptHTMLList[0];
            
-            result += `<li class="item"><div>`+ dataTime  + `<p class="datacont">`+decodedHTML.replace(/<script>.*<\/script>/,"") +`</p><p class="datafrom"><small>`+ from_icon + decodeURIComponent(array[i].from) +`</small></p></div></li>`;
+            result += `<li class="item"><div>`+ dataTime  + `<p class="datacont">`+decodedHTML+`</p><p class="datafrom"><small>`+ from_icon + decodeURIComponent(array[i].from) +`</small></p></div></li>`;
         }
     } else {
         result += '!{_p("aside.card_funds.zero")}';
@@ -67,10 +67,9 @@ var generateddHtml = array => {
     result += '</div></ul></section>'
 
     var $dom = document.querySelector('#bber');
-    $dom.innerHTML = result;
+    $dom.html(result);
     window.lazyLoadInstance && window.lazyLoadInstance.update();
     window.pjax && window.pjax.refresh($dom);
-    $('#cont').html(scriptHTML);
 }
 
 if (document.querySelector('#bber')) {
