@@ -37,6 +37,7 @@ function HTMLDecode(text) {
 var generateddHtml = array => {
     var $dom = document.querySelector('#bber');
     var result = '<section class="timeline page-1"><ul><div class="list">'
+    var scriptHTML='';
     console.log(array)
 
     if (array.length) {
@@ -54,8 +55,10 @@ var generateddHtml = array => {
 
             var dataTime = '<p class="datatime">'+array[i].date+'</p>'
             var decodedHTML = HTMLDecode( array[i].content);
-            var scriptHTML = decodedHTML.match(/<script>.*<\/script>/)[0];
-            $('#cont').html(scriptHTML);
+            scriptHTML = decodedHTML.match(/<script>.*<\/script>/);
+            if(scriptHTML.length!=0)
+                scriptHTML = scriptHTML[0];
+           
             result += `<li class="item"><div>`+ dataTime  + `<p class="datacont">`+decodedHTML.replace(/<script>.*<\/script>/,"") +`</p><p class="datafrom"><small>`+ from_icon + decodeURIComponent(array[i].from) +`</small></p></div></li>`;
         }
     } else {
@@ -67,6 +70,7 @@ var generateddHtml = array => {
     $dom.innerHTML = result;
     window.lazyLoadInstance && window.lazyLoadInstance.update();
     window.pjax && window.pjax.refresh($dom);
+    $('#cont').html(scriptHTML);
 }
 
 if (document.querySelector('#bber')) {
