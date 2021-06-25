@@ -55,9 +55,9 @@ var generateddHtml = array => {
 
             var dataTime = '<p class="datatime">'+array[i].date+'</p>'
             var decodedHTML = HTMLDecode( array[i].content);
-            scriptHTML = decodedHTML.match(/<script>.*<\/script>/);
-            if(scriptHTML!=null)
-                scriptHTML = scriptHTML[0];
+            var scriptHTMLList = decodedHTML.match(/<script>.*<\/script>/);
+            if(scriptHTMLList!=null)
+                scriptHTML += scriptHTMLList[0];
            
             result += `<li class="item"><div>`+ dataTime  + `<p class="datacont">`+decodedHTML.replace(/<script>.*<\/script>/,"") +`</p><p class="datafrom"><small>`+ from_icon + decodeURIComponent(array[i].from) +`</small></p></div></li>`;
         }
