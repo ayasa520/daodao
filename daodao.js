@@ -32,7 +32,8 @@ function getdddata(){
 function HTMLDecode(text) { 
     var temp = document.createElement("div"); 
     temp.innerHTML = text; 
-    var output = temp.innerText || temp.textContent; 
+//     var output = temp.innerText || temp.textContent; 
+    var output = temp.innerText
     temp = null; 
     return output; 
 } 
