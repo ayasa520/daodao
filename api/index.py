@@ -162,7 +162,7 @@ def search_daodao_lite(user_info, search_time_limit, search_time_limit_num):
             # 'time': time_zone_reset(this_time, zone, '%Y-%m-%d %H:%M:%S'),
             # 时间戳
             'date': {"$date": int(TIME.mktime(this_time.timetuple()))},
-            'content': json.loads("{}".format(i['body'])['content']),
+            'content': json.loads(i['body'])['content'],
             'from':json.loads(i['body'])['user_agents'],
             'id': str(i['id'])
         }
